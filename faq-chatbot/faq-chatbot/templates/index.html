@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>FAQ Chatbot</title>
+</head>
+<body>
+    <div class="container">
+        <h1>FAQ Chatbot</h1>
+        <form action="/ask" method="post" class="question-form">
+            <input type="text" name="question" placeholder="Ask a question..." required>
+            <button type="submit">Ask</button>
+        </form>
+        {% if answer %}
+            <div class="answer-card">
+                <h2>Answer:</h2>
+                <p>{{ answer }}</p>
+                <form action="/feedback" method="post" class="feedback-form">
+                    <input type="hidden" name="question" value="{{ answer }}">
+                    <input type="text" name="feedback" placeholder="Your feedback..." required>
+                    <button type="submit">Submit Feedback</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
